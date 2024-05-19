@@ -14,6 +14,16 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments += mapOf(
+                    "room.schemaLocation" to "$projectDir/schemas",
+                    "room.incremental" to "true",
+                    "room.expandProjection" to "true"
+                )
+            }
+        }
     }
 
     buildTypes {
@@ -62,7 +72,7 @@ dependencies {
 
     //Room
     implementation (libs.androidx.room.runtime)
-    implementation("androidx.room:room-ktx:2.6.1")
+    implementation(libs.androidx.room.ktx)
     ksp (libs.androidx.room.compiler)
 
     testImplementation(libs.junit)
